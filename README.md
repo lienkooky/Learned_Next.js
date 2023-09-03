@@ -103,3 +103,85 @@ const IndexPage = ({ staticData }) => {
 
 export default IndexPage;
 ```
+
+---
+
+</br>
+
+# ❗ 23.09.03 Learned_Next.js
+
+### Good to know
+
+- Dynamic Routes
+  - Next.js는 app/.../page.tsx에서 동적으로 URL의 params값을 받을 수 있다.
+  - 동적으로 받는 방법은 3가지가 있다.
+  - app/blog/[slug]/page.tsx
+  - app/blog/[...slug]/page.tsx
+  - app/blog/[[...slug]]/page.tsx
+
+### 1. How to Dynamic Routes
+
+</br>
+
+- app/blog/[slug]/page.tsx
+
+```
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+
+example URL
+/blog/a
+params
+{slug : a}
+```
+
+</br>
+
+- app/blog/[...slug]/page.tsx (catch-all)
+
+```
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+
+example URL
+/blog/a/b/c
+params
+{slug : [a, b, c]}
+```
+
+</br>
+
+- app/blog/[[...slug]]/page.tsx(optional catch-all)
+
+```
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+
+example URL
+/blog/a/b/c
+params
+{slug : [a, b, c]}
+
+차이점
+params 값이 {} 인경우도 받을 수 있음.
+example URL
+/blog
+params
+{}
+```
+
+- app/blog/[slug]/[slug2]/page.tsx
+
+```
+export default function Page({ params }: { params: { slug: string, slug2: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+
+example URL
+/blog/a/b
+params
+{slug : [slug: a, slug2: b]}
+```
